@@ -1,17 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>My Event</h1>
+    <p>Capacity: {{ capacity }}</p>
+    <button @click="increaseCapacity()">Increase Capacity</button>
+    <axios-test />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from "vue";
+import AxiosTest from "./components/AxiosTest" 
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    AxiosTest
+  },
+
+  // Below setup() function is an example of Composition API
+  setup() {
+    const capacity = ref(3);
+
+    function increaseCapacity() { 
+      capacity.value++;
+    }
+    return { capacity, increaseCapacity };
   }
-}
+};
 </script>
 
 <style>
