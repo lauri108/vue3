@@ -1,8 +1,25 @@
 <template>
   <div class="axios-test">
     <h1>Axios test</h1>
-    <div>{{content}}</div>
-    <button @click="loadContent">Load some content</button>
+    <div class="container w-75">
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Email address</label>
+        <input type="text" v-model="usernameToSearch" class="form-control" id="exampleFormControlInput1" placeholder="Search for Github users...">
+      </div>
+      <button type="submit" class="btn btn-success" @click.prevent="loadContent">Search for users</button>
+    </form>
+    </div>
+    <div class="container w-75" v-if="listOfUsers.length > 0">
+      <div v-for="user in listOfUsers" v-bind:key="user.id" class="card" style="width: 18rem;">
+        <img :src="user.avatar_url" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">USER: {{user.login}}</h5>
+          <p class="card-text">ID: {{user.id}}</p>
+          <a :href="user.html_url" target="_blank" class="btn btn-primary">Go to {{user.login}}'s profile</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,14 +30,14 @@ import {ref} from "vue"
 export default {
   name: 'AxiosTest',
   setup() {
-    const content = ref("This is the initial content");
-
+    const listOfUsers = ref([]);
+    const usernameToSearch = ref("");
     function loadContent() { 
-      axios.get('https://api.github.com/users/phantomjs').then(res => {
-        this.content = res
+      axios.get(`https://api.github.com/search/users?q=${this.usernameToSearch}`).then(response => {
+        this.listOfUsers = response.data.items
       })
     }
-    return { content, loadContent };
+    return { listOfUsers, loadContent, usernameToSearch };
   }
 }
 </script>

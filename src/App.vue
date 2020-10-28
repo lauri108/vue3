@@ -1,29 +1,24 @@
 <template>
   <div>
-    <h1>My Event</h1>
-    <p>Capacity: {{ capacity }}</p>
-    <button @click="increaseCapacity()">Increase Capacity</button>
-    <axios-test />
+    <div class="container">
+      <div class="row">
+        <div class="col"><composition-buttons /></div>
+        <div class="col"><axios-test /></div>
+      </div>
+    </div>
+    
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+
 import AxiosTest from "./components/AxiosTest" 
+import CompositionButtons from "./components/CompositionButtons" 
 
 export default {
   components: {
-    AxiosTest
-  },
-
-  // Below setup() function is an example of Composition API
-  setup() {
-    const capacity = ref(3);
-
-    function increaseCapacity() { 
-      capacity.value++;
-    }
-    return { capacity, increaseCapacity };
+    AxiosTest,
+    CompositionButtons
   }
 };
 </script>
