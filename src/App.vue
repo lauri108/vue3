@@ -2,7 +2,10 @@
   <div>
     <div class="container">
       <div class="row">
-        <div class="col"><composition-buttons /></div>
+        <div class="col">
+          <composition-buttons />
+          <github-events />
+        </div>
         <div class="col"><axios-test /></div>
       </div>
     </div>
@@ -14,11 +17,13 @@
 
 import AxiosTest from "./components/AxiosTest" 
 import CompositionButtons from "./components/CompositionButtons" 
+import GithubEvents from "./components/GithubEvents" 
 
 export default {
   components: {
     AxiosTest,
-    CompositionButtons
+    CompositionButtons,
+    GithubEvents
   }
 };
 </script>
