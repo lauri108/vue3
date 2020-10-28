@@ -7,7 +7,7 @@
         <label for="exampleFormControlInput1">Email address</label>
         <input type="text" v-model="usernameToSearch" class="form-control" id="exampleFormControlInput1" placeholder="Search for Github users...">
       </div>
-      <button type="submit" class="btn btn-success" @click.prevent="loadContent">Search for users</button>
+      <button type="submit" class="btn btn-success" @click.prevent="searchGithubUsers">Search for users</button>
     </form>
     </div>
     <div class="container w-75" v-if="listOfUsers.length > 0">
@@ -32,12 +32,13 @@ export default {
   setup() {
     const listOfUsers = ref([]);
     const usernameToSearch = ref("");
-    function loadContent() { 
+    function searchGithubUsers() { 
       axios.get(`https://api.github.com/search/users?q=${this.usernameToSearch}`).then(response => {
         this.listOfUsers = response.data.items
       })
     }
-    return { listOfUsers, loadContent, usernameToSearch };
+    
+    return { listOfUsers, searchGithubUsers, usernameToSearch };
   }
 }
 </script>
